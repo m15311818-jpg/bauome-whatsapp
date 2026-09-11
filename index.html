@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Bauome WhatsApp - إرسال سريع</title>
+    <style>
+        /* ستايل بسيط ومريح للعين (Dark Mode) */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0b141a;
+            color: #e9edef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #111b21;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            width: 350px;
+            text-align: center;
+        }
+        h2 { color: #00a884; margin-bottom: 20px; }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #222e35;
+            background-color: #2a3942;
+            color: #fff;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #00a884;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover { background-color: #008f72; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Bauome WhatsApp 🚀</h2>
+        
+        <!-- مدخل رقم الهاتف -->
+        <input type="text" id="phone" placeholder="رقم الصديق بكود الدولة (مثال: 2010xxxxxxxx)">
+        
+        <!-- مدخل نص الرسالة -->
+        <textarea id="message" rows="4" placeholder="اكتب رسالتك هنا..."></textarea>
+        
+        <!-- زر الإرسال المباشر -->
+        <button onclick="sendToWhatsApp()">إرسال إلى واتساب الصديق</button>
+    </div>
+
+    <script>
+        function sendToWhatsApp() {
+            // 1. نجيب الرقم والرسالة اللي كتبهم المستخدم
+            let phone = document.getElementById('phone').value.trim();
+            let message = document.getElementById('message').value.trim();
+
+            // 2. نتأكد إن البيانات مش فاضية
+            if (phone === "" || message === "") {
+                alert("من فضلك اكتب الرقم والرسالة أولاً يا هندسة!");
+                return;
+            }
+
+            // 3. تحويل النص لـ صيغة تفهمها الروابط (تشفير المسافات والرموز)
+            let encodedMessage = encodeURIComponent(message);
+
+            // 4. الرابط السحري من شركة واتساب لإرسال الرسالة للرقم ده فوراً
+            let whatsappURL = `https://whatsapp.com{phone}&text=${encodedMessage}`;
+
+            // 5. فتح الرابط في صفحة جديدة عشان يفتح تطبيق الواتساب ويبعت الرسالة
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
+
+</body>
+</html>
